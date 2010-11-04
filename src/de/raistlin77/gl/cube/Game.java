@@ -14,7 +14,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
-import de.intex.tools.S;
+import de.intex.tools.lib.S;
 
 /**
  * Basic game
