@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package de.raistlin77.gl.cube;
 
 import java.util.List;
@@ -16,9 +19,10 @@ import org.lwjgl.util.glu.GLU;
 
 import de.intex.tools.lib.S;
 
+// TODO: Auto-generated Javadoc
 /**
- * Basic game
- * 
+ * Basic game.
+ *
  * @author Name <email>
  * @version 1.0
  */
@@ -26,6 +30,9 @@ public class Game {
 	
 	// XXX display count
 	
+	/**
+	 * The Class rotate.
+	 */
 	private static class rotate {
 		/** < Turning direction. */
 		public static int turn;
@@ -35,29 +42,40 @@ public class Game {
 		public static int[] tile = new int[9];
 		/** < Number of tiles. */
 		public static int anz;
-		/** < turn left/right front/rear? */
+		
+		/** < turn left/right front/rear?. */
 		public static int pos;
+		
+		/** The speed. */
 		public static int speed;
 	}
 
-	/** Game title */
+	/** Game title. */
 	public static final String GAME_TITLE = "Rubik's Cube";
 
-	/** Desired frame time */
+	/** Desired frame time. */
 	private static final int FRAMERATE = 60;
 
-	/** Exit the game */
+	/** Exit the game. */
 	private static boolean finished;
 
+	/** The Ang. */
 	private static float[] Ang = new float[] { 0, 0, 0, 4.5f };
+	
+	/** The KGLCUBE. */
 	private static Vector3D[] KGLCUBE = new Vector3D[26];
+	
+	/** The KY cube. */
 	private static Vector3D[] KYCube = new Vector3D[26];
+	
+	/** The KZ cube. */
 	private static Vector3D[] KZCube = new Vector3D[26];
 	/** < Angles for the mainturn. zero AFTER every turn. */
 	private static ANGLE[][] ANGLES = new ANGLE[26][3];
 	/** < Angles for the correcting Turn. */
 	private static ANGLE[][] ANGLES2 = new ANGLE[26][3];
 
+	/** The TILES. */
 	private static short[][] TILES = new short[][] { 
 		{ -1, +1, +1 }, {  0, +1, +1 }, { +1, +1, +1 },
 		{ -1,  0, +1 }, {  0,  0, +1 }, { +1,  0, +1 },
@@ -70,6 +88,7 @@ public class Game {
 		{ -1, -1, -1 }, {  0, -1, -1 }, { +1, -1, -1 }
 	};
 	
+	/** The MANGLES. */
 	private static short[][] MANGLES = new short[][] {
 		{   0,   0,   0 }, //oben ///////////////////////////////////////////////////
 		{   0, -90,   0 }, {   0, 180,   0 }, {   0,  90,   0 },
@@ -85,23 +104,40 @@ public class Game {
 		{  90,   0, -90 }, { 180,   0, -90 }, { -90,   0, -90 }
 	};
 
+	/** The t. */
 	private static Timer t = new Timer(); 
 
+	/** The speed. */
 	private static int speed = 10;
+	
+	/** The SOLVESTOP. */
 	private static boolean SOLVESTOP;
+	
+	/** The now turn. */
 	private static boolean nowTurn = false;
 	
+	/** The count. */
 	private static int count = 0;
 	
+	/** The c. */
 	private static Cube c = new Cube();
 
+	/** The diceing. */
 	private static boolean diceing = false;
 
+	/** The solve list. */
 	private static List<Byte> solveList;
+	
+	/** The solveing. */
 	private static boolean solveing;
+	
+	/** The solve tainted. */
 	private static boolean solveTainted = false;
 
+	/** The title addon. */
 	private static String titleAddon = null;
+	
+	/** The title addon ary. */
 	private static String[] titleAddonAry = {
 		"Flächen erste Ebene",  // 20
 		"Kanten erste Ebene",   // 21
@@ -116,7 +152,11 @@ public class Game {
 		"fertig"
 	};
 	
-	/** < Main vectors. */
+	/**
+	 * < Main vectors.
+	 *
+	 * @param args the arguments
+	 */
 
 	/**
 	 * Application init
@@ -140,10 +180,10 @@ public class Game {
 	}
 
 	/**
-	 * Initialise the game
-	 * 
-	 * @throws Exception
-	 *             if init fails
+	 * Initialise the game.
+	 *
+	 * @param fullscreen the fullscreen
+	 * @throws Exception if init fails
 	 */
 	private static void init(boolean fullscreen) throws Exception {
 		// Create a fullscreen window with 1:1 orthographic 2D projection
@@ -181,7 +221,7 @@ public class Game {
 	}
 
 	/**
-	 * Runs the game (the "main loop")
+	 * Runs the game (the "main loop").
 	 */
 	private static void run() {
 
@@ -224,7 +264,7 @@ public class Game {
 	}
 
 	/**
-	 * Do any game-specific cleanup
+	 * Do any game-specific cleanup.
 	 */
 	private static void cleanup() {
 		// Close the window
@@ -312,7 +352,7 @@ public class Game {
 	}
 		
 	/**
-	 * Render the current frame
+	 * Render the current frame.
 	 */
 	private static void render() {
 		Display.setTitle( GAME_TITLE  + ( S.isNotNull( titleAddon ) ? " - " + titleAddon : "" ) + " - " + count);
@@ -384,6 +424,9 @@ public class Game {
 
 	}
 
+	/**
+	 * Draw cube.
+	 */
 	private static void drawCube() {
 		GL11.glPushMatrix();
 		GL11.glShadeModel( GL11.GL_FLAT ); // ?!?
@@ -403,6 +446,11 @@ public class Game {
 		GL11.glPopMatrix();
 	}
 
+	/**
+	 * Draw cube.
+	 *
+	 * @param i the i
+	 */
 	private static void drawCube(int i) {
 		float col;
 		float alpha = 1.0f;
@@ -604,11 +652,23 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Sets the speed.
+	 *
+	 * @param a the new speed
+	 */
 	private static void setSpeed( boolean a ) {
 		if ( a ) speed=10;
 		else     speed=01;
 	}
 	
+	/**
+	 * Turn.
+	 *
+	 * @param r the r
+	 * @param l the l
+	 * @param xyz the xyz
+	 */
 	private static void turn(int r, int l, int xyz) {
 		// emit turned( false );
 		solveTainted = true;
@@ -630,6 +690,13 @@ public class Game {
 		turning();
 	}
 
+	/**
+	 * Switch coord.
+	 *
+	 * @param a the a
+	 * @param val the val
+	 * @return true, if successful
+	 */
 	private static boolean switchCoord(int a, double val) {
 		if ( (a == +1 && val > 0.5) || (a == 0 && val < 0.5 && val > -0.5) || (a == -1 && val < -0.5) ) {
 			return true;
@@ -637,6 +704,12 @@ public class Game {
 		return false;
 	}
 	
+	/**
+	 * Glturn2cubeturn.
+	 *
+	 * @param turn the turn
+	 * @return the int
+	 */
 	private static int glturn2cubeturn(int turn) {
 		switch ( turn ) {
 		case 1:
@@ -664,6 +737,11 @@ public class Game {
 		return turn;
 	}
 
+	/**
+	 * Turn.
+	 *
+	 * @param move the move
+	 */
 	private static void turn(byte move){
 		nowTurn = true;
 //		if(!diceing) System.out.println( String.format( "turn(%s) ", move) );
@@ -731,6 +809,9 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Dice.
+	 */
 	private static void dice(){
 		Random r = new Random();
 		diceing = true;
@@ -747,6 +828,9 @@ public class Game {
 
 	}
 
+	/**
+	 * Solve.
+	 */
 	private static void solve(){
 		solveing = true;
 		System.out.println( String.format(" %s %s", S.isNotNull( solveList ), solveTainted) );
@@ -764,114 +848,171 @@ public class Game {
 		}
 	}
 		
+	/**
+	 * Turn_01.
+	 */
 	private static void turn_01() {
 		rotate.turn = 1;
 		rotate.anz = 9;
 		turn( -1, +1, 0 );
 	}
 
+	/**
+	 * Turn_02.
+	 */
 	private static void turn_02() {
 		rotate.turn = 2;
 		rotate.anz = 8;
 		turn( 0, +1, 0 );
 	}
 
+	/**
+	 * Turn_03.
+	 */
 	private static void turn_03() {
 		rotate.turn = 3;
 		rotate.anz = 9;
 		turn( +1, +1, 0 );
 	}
 
+	/**
+	 * Turn_04.
+	 */
 	private static void turn_04() {
 		rotate.turn = 4;
 		rotate.anz = 9;
 		turn( -1, -1, 0 );
 	}
 
+	/**
+	 * Turn_05.
+	 */
 	private static void turn_05() {
 		rotate.turn = 5;
 		rotate.anz = 8;
 		turn( 0, -1, 0 );
 	}
 
+	/**
+	 * Turn_06.
+	 */
 	private static void turn_06() {
 		rotate.turn = 6;
 		rotate.anz = 9;
 		turn( +1, -1, 0 );
 	}
 
+	/**
+	 * Turn_07.
+	 */
 	private static void turn_07() {
 		rotate.turn = 7;
 		rotate.anz = 9;
 		turn( +1, +1, 1 );
 	}
 
+	/**
+	 * Turn_08.
+	 */
 	private static void turn_08() {
 		rotate.turn = 8;
 		rotate.anz = 8;
 		turn( 0, +1, 1 );
 	}
 
+	/**
+	 * Turn_09.
+	 */
 	private static void turn_09() {
 		rotate.turn = 9;
 		rotate.anz = 9;
 		turn( -1, +1, 1 );
 	}
 
+	/**
+	 * Turn_10.
+	 */
 	private static void turn_10() {
 		rotate.turn = 10;
 		rotate.anz = 9;
 		turn( +1, -1, 1 );
 	}
 
+	/**
+	 * Turn_11.
+	 */
 	private static void turn_11() {
 		rotate.turn = 11;
 		rotate.anz = 8;
 		turn( 0, -1, 1 );
 	}
 
+	/**
+	 * Turn_12.
+	 */
 	private static void turn_12() {
 		rotate.turn = 12;
 		rotate.anz = 9;
 		turn( -1, -1, 1 );
 	}
 
+	/**
+	 * Turn_13.
+	 */
 	private static void turn_13() {
 		rotate.turn = 13;
 		rotate.anz = 9;
 		turn( +1, +1, 2 );
 	}
 
+	/**
+	 * Turn_14.
+	 */
 	private static void turn_14() {
 		rotate.turn = 14;
 		rotate.anz = 8;
 		turn( 0, +1, 2 );
 	}
 
+	/**
+	 * Turn_15.
+	 */
 	private static void turn_15() {
 		rotate.turn = 15;
 		rotate.anz = 9;
 		turn( -1, +1, 2 );
 	}
 
+	/**
+	 * Turn_16.
+	 */
 	private static void turn_16() {
 		rotate.turn = 16;
 		rotate.anz = 9;
 		turn( +1, -1, 2 );
 	}
 
+	/**
+	 * Turn_17.
+	 */
 	private static void turn_17() {
 		rotate.turn = 17;
 		rotate.anz = 8;
 		turn( 0, -1, 2 );
 	}
 
+	/**
+	 * Turn_18.
+	 */
 	private static void turn_18() {
 		rotate.turn = 18;
 		rotate.anz = 9;
 		turn( -1, -1, 2 );
 	}
 
+	/**
+	 * Turning.
+	 */
 	private static void turning() {
 		Rotation r = null;
 		int sw = rotate.turn;
@@ -944,11 +1085,25 @@ public class Game {
 
 	}
 	
+	/**
+	 * Switch vector.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param z the z
+	 * @param v the v
+	 * @return true, if successful
+	 */
 	private static boolean switchVector(int x, int y, int z, Vector3D v) {
 		return (switchCoord( x, v.getX() ) && switchCoord( y, v.getY() ) && switchCoord( z, v.getZ() ));
 
 	}
 	
+	/**
+	 * Sets the angles.
+	 *
+	 * @param tile the new angles
+	 */
 	private static void setAngles( int tile ) {
 		  int NUM=-1;
 		  if ( switchVector( 0,1,0, KYCube[tile] ) ) {// gerade nach oben ////////////////////////////////////

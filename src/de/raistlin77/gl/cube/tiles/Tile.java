@@ -1,12 +1,30 @@
+/*
+ * 
+ */
 package de.raistlin77.gl.cube.tiles;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Tile.
+ */
 public abstract class Tile implements ITile {
 
+	/** The count. */
 	protected int count = 0;
 
+	/** The o. */
 	protected Order[] o;
+	
+	/** The c. */
 	protected Color[] c;
 
+	/**
+	 * Instantiates a new tile.
+	 *
+	 * @param o the o
+	 * @param c the c
+	 * @param count the count
+	 */
 	protected Tile( Order[]o, Color[]c, int count ) {
 		this.count = count;
 		if( count!=o.length || count!=c.length ) {
@@ -17,6 +35,13 @@ public abstract class Tile implements ITile {
 		this.c = c;
 	}
 
+	/**
+	 * T ri.
+	 *
+	 * @param c the c
+	 * @param ca the ca
+	 * @return true, if successful
+	 */
 	private boolean TRi(Color c, Color[] ca) {
 		for ( int i = 0; i < ca.length; i++ ) {
 			if ( ca[i] == c ) {
@@ -28,7 +53,10 @@ public abstract class Tile implements ITile {
 
 	/**
 	 * Hat Die Kante die Farben? Prüfte nach ob diese Teile die übergebene
-	 * Farben bestize die ausrichtung ist völlig egal
+	 * Farben bestize die ausrichtung ist völlig egal.
+	 *
+	 * @param ca the ca
+	 * @return true, if successful
 	 */
 	public boolean TRi(Color[] ca) {
 		if ( ca.length != count )
@@ -46,7 +74,10 @@ public abstract class Tile implements ITile {
 	/**
 	 * Liefert bei übergebenenem Teil und Ausrichtungung die Farbe zurück
 	 * Funktion ist überladen für Flaechen , Kanten und Ecken und inline
-	 * definiert
+	 * definiert.
+	 *
+	 * @param o the o
+	 * @return the color
 	 */
 	public Color FaRT(Order o) {
 		for ( int i = 0; i < count; i++ ) {
@@ -60,7 +91,10 @@ public abstract class Tile implements ITile {
 	/**
 	 * Liefert bei übergebenenem Teil und Ausrichtungung die Farbe zurück
 	 * Funktion ist überladen für Flaechen , Kanten und Ecken und inline
-	 * definiert
+	 * definiert.
+	 *
+	 * @param o the o
+	 * @return the char
 	 */
 	public static char colorChar(Color o) {
 		switch( o ){
@@ -86,6 +120,10 @@ public abstract class Tile implements ITile {
 	 * die funktion liefert in abhängikteit der drehrichtung die Richtung zurück
 	 * von der die Farbe stammen muß. z.B. Drehrichtung 1 die vorderen Flächen
 	 * stammt die neue Farbe von unten
+	 *
+	 * @param move the move
+	 * @param AR the aR
+	 * @return the order
 	 */
 	public Order WR( byte move, Order AR) {
 		  // wertet die Drehrichtung aus und liefert die zukopierent richtung
@@ -149,12 +187,24 @@ public abstract class Tile implements ITile {
 		  return AR;
 	}
 	
+	/**
+	 * Swap.
+	 *
+	 * @param t the t
+	 * @param move the move
+	 */
 	public void swap( Tile t, byte move ){
 		for(int i=0; i<count; i++){
 			newColor( o[i], t.FaRT( WR( move, o[i] ) ) );			
 		}
 	}
 	
+	/**
+	 * New color.
+	 *
+	 * @param o the o
+	 * @param c the c
+	 */
 	private void newColor( Order o, Color c ){
 		for(int i=0; i<count; i++){
 			if( o==this.o[i] ){

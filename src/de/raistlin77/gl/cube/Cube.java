@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package de.raistlin77.gl.cube;
 
 import java.util.ArrayList;
@@ -11,47 +14,55 @@ import de.raistlin77.gl.cube.tiles.Corner;
 import de.raistlin77.gl.cube.tiles.Edge;
 import de.raistlin77.gl.cube.tiles.Tile;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Cube.
+ */
 public class Cube {
 
 	/**
-	 *            +--+--+--+
-	 *            |10|22|17|
-	 *            +--+--+--+
-	 *            |11|23|16|
-	 *            +--+--+--+
-	 *            | 1| 2| 3|
-	 *            +--+--+--+
-	 * +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+
-	 * |10|11| 1| | 1| 2| 3| | 3|16|17| |17|22|10| > 7 10
-	 * +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+
-	 * |12|13| 4| | 4| 5| 6| | 6|18|19| |19|26|12| > 8 11
-	 * +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+
-	 * |14|15| 7| | 7| 8| 9| | 9|20|21| |21|25|14| > 9 12
-	 * +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+ 
-	 *            +--+--+--+  ^^ ^^ ^^
-	 *            | 7| 8| 9|  13 14 15
-	 *            +--+--+--+
-	 *            |15|24|20|  16 17 18
-	 *            +--+--+--+
-	 *            |14|25|21|
-	 *            +--+--+--+
-	 *             ^^ ^^ ^^ 1 2 3 4 5 6
+	 * +--+--+--+ |10|22|17| +--+--+--+ |11|23|16| +--+--+--+ | 1| 2| 3|
+	 * +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+ |10|11| 1| | 1| 2|
+	 * 3| | 3|16|17| |17|22|10| > 7 10 +--+--+--+ +--+--+--+ +--+--+--+
+	 * +--+--+--+ |12|13| 4| | 4| 5| 6| | 6|18|19| |19|26|12| > 8 11 +--+--+--+
+	 * +--+--+--+ +--+--+--+ +--+--+--+ |14|15| 7| | 7| 8| 9| | 9|20|21|
+	 * |21|25|14| > 9 12 +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+ +--+--+--+
+	 * ^^ ^^ ^^ | 7| 8| 9| 13 14 15 +--+--+--+ |15|24|20| 16 17 18 +--+--+--+
+	 * |14|25|21| +--+--+--+ ^^ ^^ ^^ 1 2 3 4 5 6.
 	 */
 
 	private Area ST05, ST13, ST18, ST23, ST24, ST26;
+
+	/** The S t25. */
 	private Edge ST02, ST04, ST06, ST08, ST11, ST12, ST15, ST16, ST19, ST20, ST22, ST25;
+
+	/** The S t21. */
 	private Corner ST01, ST03, ST07, ST09, ST10, ST14, ST17, ST21;
 
+	/** The T26. */
 	private Area T05, T13, T18, T23, T24, T26;
+
+	/** The T25. */
 	private Edge T02, T04, T06, T08, T11, T12, T15, T16, T19, T20, T22, T25;
+
+	/** The T21. */
 	private Corner T01, T03, T07, T09, T10, T14, T17, T21;
 
+	/** The count moves. */
 	private long countMoves;
+
+	/** The solveing. */
 	private boolean solveing = false;
+
+	/** The solve list. */
 	private List<Byte> solveList;
-	
+
+	/** The show. */
 	private boolean show = true;
 
+	/**
+	 * Instantiates a new cube.
+	 */
 	public Cube() {
 		setNew();
 		solveing = false;
@@ -59,35 +70,44 @@ public class Cube {
 
 	}
 
+	/**
+	 * Sets the new.
+	 */
 	public void setNew() {
-		T01 = new Corner( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.AHEAD, Tile.Order.LEFT },   new Tile.Color[] { Tile.Color.WHITE, Tile.Color.RED, Tile.Color.BLUE } );
-		T02 = new Edge(   new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.AHEAD },                    new Tile.Color[] { Tile.Color.WHITE, Tile.Color.RED } );
-		T03 = new Corner( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.AHEAD, Tile.Order.RIGHT },  new Tile.Color[] { Tile.Color.WHITE, Tile.Color.RED, Tile.Color.GREEN } );
-		T04 = new Edge(   new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.LEFT },                     new Tile.Color[] { Tile.Color.RED, Tile.Color.BLUE } );
-		T05 = new Area(   new Tile.Order[] { Tile.Order.AHEAD },                                      new Tile.Color[] { Tile.Color.RED } );
-		T06 = new Edge(   new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.RIGHT },                    new Tile.Color[] { Tile.Color.RED, Tile.Color.GREEN } );
-		T07 = new Corner( new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.BELOW, Tile.Order.LEFT },   new Tile.Color[] { Tile.Color.RED, Tile.Color.YELLOW, Tile.Color.BLUE } );
-		T08 = new Edge(   new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.BELOW },                    new Tile.Color[] { Tile.Color.RED, Tile.Color.YELLOW } );
-		T09 = new Corner( new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.BELOW, Tile.Order.RIGHT },  new Tile.Color[] { Tile.Color.RED, Tile.Color.YELLOW, Tile.Color.GREEN } );
-		T10 = new Corner( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.LEFT, Tile.Order.BEHIND },  new Tile.Color[] { Tile.Color.WHITE, Tile.Color.BLUE, Tile.Color.ORANGE } );
-		T11 = new Edge(   new Tile.Order[] { Tile.Order.LEFT, Tile.Order.ABOVE },                     new Tile.Color[] { Tile.Color.BLUE, Tile.Color.WHITE } );
-		T12 = new Edge(   new Tile.Order[] { Tile.Order.BEHIND, Tile.Order.LEFT },                    new Tile.Color[] { Tile.Color.ORANGE, Tile.Color.BLUE } );
-		T13 = new Area(   new Tile.Order[] { Tile.Order.LEFT },                                       new Tile.Color[] { Tile.Color.BLUE } );
-		T14 = new Corner( new Tile.Order[] { Tile.Order.LEFT, Tile.Order.BELOW, Tile.Order.BEHIND },  new Tile.Color[] { Tile.Color.BLUE, Tile.Color.YELLOW, Tile.Color.ORANGE } );
-		T15 = new Edge(   new Tile.Order[] { Tile.Order.BELOW, Tile.Order.LEFT },                     new Tile.Color[] { Tile.Color.YELLOW, Tile.Color.BLUE } );
-		T16 = new Edge(   new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.RIGHT },                    new Tile.Color[] { Tile.Color.WHITE, Tile.Color.GREEN } );
+		T01 = new Corner( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.AHEAD, Tile.Order.LEFT }, new Tile.Color[] { Tile.Color.WHITE, Tile.Color.RED, Tile.Color.BLUE } );
+		T02 = new Edge( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.AHEAD }, new Tile.Color[] { Tile.Color.WHITE, Tile.Color.RED } );
+		T03 = new Corner( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.AHEAD, Tile.Order.RIGHT }, new Tile.Color[] { Tile.Color.WHITE, Tile.Color.RED, Tile.Color.GREEN } );
+		T04 = new Edge( new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.LEFT }, new Tile.Color[] { Tile.Color.RED, Tile.Color.BLUE } );
+		T05 = new Area( new Tile.Order[] { Tile.Order.AHEAD }, new Tile.Color[] { Tile.Color.RED } );
+		T06 = new Edge( new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.RIGHT }, new Tile.Color[] { Tile.Color.RED, Tile.Color.GREEN } );
+		T07 = new Corner( new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.BELOW, Tile.Order.LEFT }, new Tile.Color[] { Tile.Color.RED, Tile.Color.YELLOW, Tile.Color.BLUE } );
+		T08 = new Edge( new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.BELOW }, new Tile.Color[] { Tile.Color.RED, Tile.Color.YELLOW } );
+		T09 = new Corner( new Tile.Order[] { Tile.Order.AHEAD, Tile.Order.BELOW, Tile.Order.RIGHT }, new Tile.Color[] { Tile.Color.RED, Tile.Color.YELLOW, Tile.Color.GREEN } );
+		T10 = new Corner( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.LEFT, Tile.Order.BEHIND }, new Tile.Color[] { Tile.Color.WHITE, Tile.Color.BLUE, Tile.Color.ORANGE } );
+		T11 = new Edge( new Tile.Order[] { Tile.Order.LEFT, Tile.Order.ABOVE }, new Tile.Color[] { Tile.Color.BLUE, Tile.Color.WHITE } );
+		T12 = new Edge( new Tile.Order[] { Tile.Order.BEHIND, Tile.Order.LEFT }, new Tile.Color[] { Tile.Color.ORANGE, Tile.Color.BLUE } );
+		T13 = new Area( new Tile.Order[] { Tile.Order.LEFT }, new Tile.Color[] { Tile.Color.BLUE } );
+		T14 = new Corner( new Tile.Order[] { Tile.Order.LEFT, Tile.Order.BELOW, Tile.Order.BEHIND }, new Tile.Color[] { Tile.Color.BLUE, Tile.Color.YELLOW, Tile.Color.ORANGE } );
+		T15 = new Edge( new Tile.Order[] { Tile.Order.BELOW, Tile.Order.LEFT }, new Tile.Color[] { Tile.Color.YELLOW, Tile.Color.BLUE } );
+		T16 = new Edge( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.RIGHT }, new Tile.Color[] { Tile.Color.WHITE, Tile.Color.GREEN } );
 		T17 = new Corner( new Tile.Order[] { Tile.Order.ABOVE, Tile.Order.RIGHT, Tile.Order.BEHIND }, new Tile.Color[] { Tile.Color.WHITE, Tile.Color.GREEN, Tile.Color.ORANGE } );
-		T18 = new Area(   new Tile.Order[] { Tile.Order.RIGHT },                                      new Tile.Color[] { Tile.Color.GREEN } );
-		T19 = new Edge(   new Tile.Order[] { Tile.Order.RIGHT, Tile.Order.BEHIND },                   new Tile.Color[] { Tile.Color.GREEN, Tile.Color.ORANGE } );
-		T20 = new Edge(   new Tile.Order[] { Tile.Order.RIGHT, Tile.Order.BELOW },                    new Tile.Color[] { Tile.Color.GREEN, Tile.Color.YELLOW } );
+		T18 = new Area( new Tile.Order[] { Tile.Order.RIGHT }, new Tile.Color[] { Tile.Color.GREEN } );
+		T19 = new Edge( new Tile.Order[] { Tile.Order.RIGHT, Tile.Order.BEHIND }, new Tile.Color[] { Tile.Color.GREEN, Tile.Color.ORANGE } );
+		T20 = new Edge( new Tile.Order[] { Tile.Order.RIGHT, Tile.Order.BELOW }, new Tile.Color[] { Tile.Color.GREEN, Tile.Color.YELLOW } );
 		T21 = new Corner( new Tile.Order[] { Tile.Order.BELOW, Tile.Order.RIGHT, Tile.Order.BEHIND }, new Tile.Color[] { Tile.Color.YELLOW, Tile.Color.GREEN, Tile.Color.ORANGE } );
-		T22 = new Edge(   new Tile.Order[] { Tile.Order.BEHIND, Tile.Order.ABOVE },                   new Tile.Color[] { Tile.Color.ORANGE, Tile.Color.WHITE } );
-		T23 = new Area(   new Tile.Order[] { Tile.Order.ABOVE },                                      new Tile.Color[] { Tile.Color.WHITE } );
-		T24 = new Area(   new Tile.Order[] { Tile.Order.BELOW },                                      new Tile.Color[] { Tile.Color.YELLOW } );
-		T25 = new Edge(   new Tile.Order[] { Tile.Order.BEHIND, Tile.Order.BELOW },                   new Tile.Color[] { Tile.Color.ORANGE, Tile.Color.YELLOW } );
-		T26 = new Area(   new Tile.Order[] { Tile.Order.BEHIND },                                     new Tile.Color[] { Tile.Color.ORANGE } );
+		T22 = new Edge( new Tile.Order[] { Tile.Order.BEHIND, Tile.Order.ABOVE }, new Tile.Color[] { Tile.Color.ORANGE, Tile.Color.WHITE } );
+		T23 = new Area( new Tile.Order[] { Tile.Order.ABOVE }, new Tile.Color[] { Tile.Color.WHITE } );
+		T24 = new Area( new Tile.Order[] { Tile.Order.BELOW }, new Tile.Color[] { Tile.Color.YELLOW } );
+		T25 = new Edge( new Tile.Order[] { Tile.Order.BEHIND, Tile.Order.BELOW }, new Tile.Color[] { Tile.Color.ORANGE, Tile.Color.YELLOW } );
+		T26 = new Area( new Tile.Order[] { Tile.Order.BEHIND }, new Tile.Color[] { Tile.Color.ORANGE } );
 	}
 
+	/**
+	 * Move.
+	 * 
+	 * @param move
+	 *            the move
+	 */
 	public void move(byte move) {
 		// Ruft die Funktion in abhängikeit von der drehrichtung die F. SW(...)
 		// auf
@@ -155,8 +175,8 @@ public class Cube {
 			SW( T10, T22, T14, T12, T21, T25, T17, T19, move );
 			break;
 		}
-		
-		if( isShow() ){
+
+		if ( isShow() ) {
 			System.out.println( this );
 			try {
 				Thread.sleep( 100 );
@@ -164,129 +184,151 @@ public class Cube {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
+	/**
+	 * Dice.
+	 */
 	public void dice() {
-        // initialisiert den Generator mit der PID und Laufzeit des Programmes
+		// initialisiert den Generator mit der PID und Laufzeit des Programmes
 		Random r = new Random();
 		// anzahl der Dreheungen auf NULL
-		countMoves=0;
-		int z=0;
+		countMoves = 0;
+		int z = 0;
 		// anzah der schritte ver verwürfelung
-	    int y = 1000 + r.nextInt( 100000 );
+		int y = 1000 + r.nextInt( 100000 );
 
-	    for(long x=0; x<y; x++){
-		    z =  1 + r.nextInt(18);
-		    // drehen mit schritt x
-		    move( (byte)z );
-	    }
+		for ( long x = 0; x < y; x++ ) {
+			z = 1 + r.nextInt( 18 );
+			// drehen mit schritt x
+			move( (byte) z );
+		}
 	}
 
+	/**
+	 * Solve.
+	 */
 	public void solve() {
 		solveing = true;
 		countMoves = 0;
-		
+
 		solveList.clear();
-		
-		solveList.add( (byte)20 );
+
+		solveList.add( (byte) 20 );
 		F1E();
-		solveList.add( (byte)21 );
-		while( T05.FaRT( Tile.Order.AHEAD ) != Tile.Color.RED ){
-			move( (byte)11 );
+		solveList.add( (byte) 21 );
+		while ( T05.FaRT( Tile.Order.AHEAD ) != Tile.Color.RED ) {
+			move( (byte) 11 );
 		}
-		  K1E( Tile.Color.RED );  // Kanten der 1. Ebene
-		  solveList.add( (byte)22 );
-		  E1E( Tile.Color.BLUE );
-		  solveList.add( (byte)23 );
-		  while ( T05.FaRT( Tile.Order.AHEAD )!=Tile.Color.RED ) {
-		    move( (byte)8 );
-		  }
-		  solveList.add( (byte)24 );
-		  K2E( Tile.Color.RED );
-		  solveList.add( (byte)25 );
-		  move( (byte)1 );
-		  move( (byte)2 );
-		  move( (byte)3 );
-		  move( (byte)3 );
-		  move( (byte)2 );
-		  move( (byte)1 );
-		  E3();
-		  solveList.add( (byte)25 );
-		  move( (byte)1 );
-		  move( (byte)2 );
-		  move( (byte)3 );
-		  move( (byte)3 );
-		  move( (byte)2 );
-		  move( (byte)1 );
+		K1E( Tile.Color.RED ); // Kanten der 1. Ebene
+		solveList.add( (byte) 22 );
+		E1E( Tile.Color.BLUE );
+		solveList.add( (byte) 23 );
+		while ( T05.FaRT( Tile.Order.AHEAD ) != Tile.Color.RED ) {
+			move( (byte) 8 );
+		}
+		solveList.add( (byte) 24 );
+		K2E( Tile.Color.RED );
+		solveList.add( (byte) 25 );
+		move( (byte) 1 );
+		move( (byte) 2 );
+		move( (byte) 3 );
+		move( (byte) 3 );
+		move( (byte) 2 );
+		move( (byte) 1 );
+		E3();
+		solveList.add( (byte) 25 );
+		move( (byte) 1 );
+		move( (byte) 2 );
+		move( (byte) 3 );
+		move( (byte) 3 );
+		move( (byte) 2 );
+		move( (byte) 1 );
 
-		  solveList.add( (byte)30 );
-		  
-		  System.out.println( String.format( "%s Züge", countMoves ));
-		  System.out.println( String.format( "%s Lösungszüge", solveList.size()-11 ));
-		  System.out.println( StringUtils.join( solveList, "-" ) );
-		  
-		  boolean change;
-		  int count;
-		  
-		  do {
-			  change = false;
-			  
-			  /* Parse the solve list to clear 4 same turns *****************************/
-			  for(int i=0; i<(solveList.size()-4); i++){
-				  count = 0;
-				  for(int j=0; j<4; j++){
-					  if( solveList.get( i ).equals( solveList.get( i+j ) ) ){
-						  count++;
-					  }
-				  }
-				  if( count==4 ){
-					  System.out.println( String.format("4er Paar gefunden. %s", i) );
-					  change = true;
-					  solveList.remove( i );
-					  solveList.remove( i );
-					  solveList.remove( i );
-					  solveList.remove( i );
-				  }
-			  }
-			  
-			  /* Parse the solve list to clear turn and following anti turn *************/
-			  for(int i=0; i<(solveList.size()-1); i++){
-				  if( solveList.get( i ).equals( antiTurn( solveList.get( i+1 ) ) ) ){
-					  System.out.println( String.format("Zug / Gegenzug Paar gefunden. %s", i) );
-					  change = true;
-					  solveList.remove( i );
-					  solveList.remove( i );
-				  }
-			  }
+		solveList.add( (byte) 30 );
 
-			  /* Parse the solve list to change 3 at one line into 1 to the other side **/
-			  for(int i=0; i<(solveList.size()-3); i++){
-				  count = 0;
-				  for(int j=0; j<3; j++){
-					  if( solveList.get( i ).equals( solveList.get( i+j ) ) ){
-						  count++;
-					  }
-				  }
-				  if( count==3 ){
-					  byte a = (byte) antiTurn( solveList.get(i) );
-					  System.out.println( String.format("tausche 3er Kobi durch Gegenzug. %s", i) );
-					  change = true;
-					  solveList.remove( i );
-					  solveList.remove( i );
-					  solveList.set( i, a );
-				  }
-			  }
+		System.out.println( String.format( "%s Züge", countMoves ) );
+		System.out.println( String.format( "%s Lösungszüge", solveList.size() - 11 ) );
+		System.out.println( StringUtils.join( solveList, "-" ) );
 
-		  } while(change);
-		  
-		  System.out.println( String.format( "%s Lösungszüge", solveList.size()-11 ));
-		  System.out.println( StringUtils.join( solveList, "-" ) );
-		  
-		  solveing = false;
-		
+		boolean change;
+		int count;
+
+		do {
+			change = false;
+
+			/*
+			 * Parse the solve list to clear 4 same turns
+			 * ****************************
+			 */
+			for ( int i = 0; i < (solveList.size() - 4); i++ ) {
+				count = 0;
+				for ( int j = 0; j < 4; j++ ) {
+					if ( solveList.get( i ).equals( solveList.get( i + j ) ) ) {
+						count++;
+					}
+				}
+				if ( count == 4 ) {
+					System.out.println( String.format( "4er Paar gefunden. %s", i ) );
+					change = true;
+					solveList.remove( i );
+					solveList.remove( i );
+					solveList.remove( i );
+					solveList.remove( i );
+				}
+			}
+
+			/*
+			 * Parse the solve list to clear turn and following anti turn
+			 * ************
+			 */
+			for ( int i = 0; i < (solveList.size() - 1); i++ ) {
+				if ( solveList.get( i ).equals( antiTurn( solveList.get( i + 1 ) ) ) ) {
+					System.out.println( String.format( "Zug / Gegenzug Paar gefunden. %s", i ) );
+					change = true;
+					solveList.remove( i );
+					solveList.remove( i );
+				}
+			}
+
+			/*
+			 * Parse the solve list to change 3 at one line into 1 to the other
+			 * side *
+			 */
+			for ( int i = 0; i < (solveList.size() - 3); i++ ) {
+				count = 0;
+				for ( int j = 0; j < 3; j++ ) {
+					if ( solveList.get( i ).equals( solveList.get( i + j ) ) ) {
+						count++;
+					}
+				}
+				if ( count == 3 ) {
+					byte a = (byte) antiTurn( solveList.get( i ) );
+					System.out.println( String.format( "tausche 3er Kobi durch Gegenzug. %s", i ) );
+					change = true;
+					solveList.remove( i );
+					solveList.remove( i );
+					solveList.set( i, a );
+				}
+			}
+
+		} while ( change );
+
+		System.out.println( String.format( "%s Lösungszüge", solveList.size() - 11 ) );
+		System.out.println( StringUtils.join( solveList, "-" ) );
+
+		solveing = false;
+
 	}
 
+	/**
+	 * Anti turn.
+	 * 
+	 * @param move
+	 *            the move
+	 * @return the byte
+	 */
 	private byte antiTurn(byte move) {
 		switch ( move ) {
 		case 1:
@@ -298,7 +340,7 @@ public class Cube {
 		case 13:
 		case 14:
 		case 15:
-			return (byte)(move + 3);
+			return (byte) (move + 3);
 			// break;
 		case 4:
 		case 5:
@@ -309,12 +351,15 @@ public class Cube {
 		case 16:
 		case 17:
 		case 18:
-			return (byte)(move - 3);
+			return (byte) (move - 3);
 			// break;
 		}
 		return 0;
 	}
 
+	/**
+	 * F1 e.
+	 */
 	public void F1E() {
 		Tile.Color[] q = new Tile.Color[] { Tile.Color.WHITE };
 		// drehet die weiße fläche nach oben
@@ -332,6 +377,12 @@ public class Cube {
 		}
 	}
 
+	/**
+	 * K1 e.
+	 * 
+	 * @param c
+	 *            the c
+	 */
 	private void K1E(Tile.Color c) {
 		Tile.Color[] qc = new Tile.Color[] { Tile.Color.WHITE, c };
 		for ( int i = 0; i < 4; i++ ) { // für 4Kanten
@@ -382,6 +433,12 @@ public class Cube {
 		}
 	}
 
+	/**
+	 * E1 e.
+	 * 
+	 * @param c
+	 *            the c
+	 */
 	private void E1E(Tile.Color c) {
 		// cColor q[1]=qc, q[2];
 		Tile.Color[] q = new Tile.Color[] { Tile.Color.WHITE, c, Tile.Color.BLACK };
@@ -458,6 +515,12 @@ public class Cube {
 		}
 	}
 
+	/**
+	 * K2 e.
+	 * 
+	 * @param c
+	 *            the c
+	 */
 	private void K2E(Tile.Color c) {
 		Tile.Color[] q = new Tile.Color[] { c, Tile.Color.BLACK };
 		for ( int x = 0; x < 4; x++ ) { // für alle 4 Kanten
@@ -554,6 +617,9 @@ public class Cube {
 		}
 	}
 
+	/**
+	 * E3.
+	 */
 	private void E3() {
 		solveList.add( (byte) 26 );
 		// solange drehen bis orange/gelb vorne ist
@@ -587,8 +653,13 @@ public class Cube {
 		solveList.add( (byte) 27 );
 		// dreht evrl. die gelbe Farbe nach oben
 		for ( int x = 0; x < 4; x++ ) { // für alle 4 Kanten
-			if ( T16.FaRT( Tile.Order.ABOVE ) != Tile.Color.YELLOW ) { // wenn gelb nicht oben ist,
-				for ( int y = 0; y < 4; y++ ) { // muß dieser Zug muß 4x pro Kante durchgeführt werden
+			if ( T16.FaRT( Tile.Order.ABOVE ) != Tile.Color.YELLOW ) { // wenn
+																		// gelb
+																		// nicht
+																		// oben
+																		// ist,
+				for ( int y = 0; y < 4; y++ ) { // muß dieser Zug muß 4x pro
+												// Kante durchgeführt werden
 					move( (byte) 3 );
 					move( (byte) 8 );
 				}
@@ -666,6 +737,9 @@ public class Cube {
 		}
 	}
 
+	/**
+	 * K3 e.
+	 */
 	private void K3E() {
 		// dieser zug tasuch die KAnten vorne und links
 		move( (byte) 10 );
@@ -677,6 +751,9 @@ public class Cube {
 		move( (byte) 13 );
 	}
 
+	/**
+	 * E3 e.
+	 */
 	private void E3E() {
 		// dieser zug vertausch die Ecken vorne links und rechts
 		move( (byte) 16 );
@@ -695,6 +772,25 @@ public class Cube {
 	 * SW tausch die Teile in Folgender Reihenfolge 1 < 2 < 3 < 4 \>>>>>>>>>>>^
 	 * die gechied mit hilfe der Funktion swap(...) in anhängingkeit der
 	 * Drehrichtung
+	 * 
+	 * @param c1
+	 *            the c1
+	 * @param e1
+	 *            the e1
+	 * @param c2
+	 *            the c2
+	 * @param e2
+	 *            the e2
+	 * @param c3
+	 *            the c3
+	 * @param e3
+	 *            the e3
+	 * @param c4
+	 *            the c4
+	 * @param e4
+	 *            the e4
+	 * @param move
+	 *            the move
 	 */
 	private void SW(Corner c1, Edge e1, Corner c2, Edge e2, Corner c3, Edge e3, Corner c4, Edge e4, byte move) {
 		Corner ctmp = c1.dup();
@@ -713,6 +809,28 @@ public class Cube {
 		c4.swap( ctmp, move );
 	}
 
+	/**
+	 * SW.
+	 * 
+	 * @param e1
+	 *            the e1
+	 * @param a1
+	 *            the a1
+	 * @param e2
+	 *            the e2
+	 * @param a2
+	 *            the a2
+	 * @param e3
+	 *            the e3
+	 * @param a3
+	 *            the a3
+	 * @param e4
+	 *            the e4
+	 * @param a4
+	 *            the a4
+	 * @param move
+	 *            the move
+	 */
 	private void SW(Edge e1, Area a1, Edge e2, Area a2, Edge e3, Area a3, Edge e4, Area a4, byte move) {
 		Edge etmp = e1.dup();
 		Area atmp = a1.dup();
@@ -722,17 +840,22 @@ public class Cube {
 
 		e2.swap( e3, move );
 		a2.swap( a3, move );
-		
+
 		e3.swap( e4, move );
 		a3.swap( a4, move );
-		
+
 		e4.swap( etmp, move );
 		a4.swap( atmp, move );
 	}
-	
-	public String toString(){
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		
+
 		char O1 = Tile.colorChar( T10.FaRT( Tile.Order.ABOVE ) );
 		char O2 = Tile.colorChar( T22.FaRT( Tile.Order.ABOVE ) );
 		char O3 = Tile.colorChar( T17.FaRT( Tile.Order.ABOVE ) );
@@ -814,65 +937,129 @@ public class Cube {
 		sb.append( String.format( "               +---+---+---+\n" ) );
 		sb.append( String.format( "               + %s + %s + %s +\n", U7, U8, U9 ) );
 		sb.append( String.format( "               +---+---+---+\n" ) );
-		
+
 		return sb.toString();
 	}
-	
-	public static void main(String[] args){
+
+	/**
+	 * The main method.
+	 * 
+	 * @param args
+	 *            the arguments
+	 */
+	public static void main(String[] args) {
 		Cube c = new Cube();
 
 		c.setShow( false );
-		c.dice();		
+		c.dice();
 		c.saveState();
 		c.solve();
 		c.restoreState();
 		c.setShow( true );
-		
+
 		int i = 1;
-		for( Byte b : c.getSolveList() ){
-			System.out.println( String.format("Zug: %d", i) );
+		for ( Byte b : c.getSolveList() ) {
+			System.out.println( String.format( "Zug: %d", i ) );
 			c.move( b );
 			i++;
 		}
-		
-	}
-	
-	public void saveState(){
-		ST01 = T01.dup();		ST02 = T02.dup();		ST03 = T03.dup();		ST04 = T04.dup();
-		ST05 = T05.dup();		ST06 = T06.dup();		ST07 = T07.dup();		ST08 = T08.dup();
-		ST09 = T09.dup();		ST10 = T10.dup();		ST11 = T11.dup();		ST12 = T12.dup();
-		ST13 = T13.dup();		ST14 = T14.dup();		ST15 = T15.dup();		ST16 = T16.dup();
-		ST17 = T17.dup();		ST18 = T18.dup();		ST19 = T19.dup();		ST20 = T20.dup();
-		ST21 = T21.dup();		ST22 = T22.dup();		ST23 = T23.dup();		ST24 = T24.dup();
-		ST25 = T25.dup();		ST26 = T26.dup();
-	}
-	
-	public void restoreState(){
-		T01 = ST01.dup();		T02 = ST02.dup();		T03 = ST03.dup();		T04 = ST04.dup();
-		T05 = ST05.dup();		T06 = ST06.dup();		T07 = ST07.dup();		T08 = ST08.dup();
-		T09 = ST09.dup();		T10 = ST10.dup();		T11 = ST11.dup();		T12 = ST12.dup();
-		T13 = ST13.dup();		T14 = ST14.dup();		T15 = ST15.dup();		T16 = ST16.dup();
-		T17 = ST17.dup();		T18 = ST18.dup();		T19 = ST19.dup();		T20 = ST20.dup();
-		T21 = ST21.dup();		T22 = ST22.dup();		T23 = ST23.dup();		T24 = ST24.dup();
-		T25 = ST25.dup();		T26 = ST26.dup();
+
 	}
 
-	
+	/**
+	 * Save state.
+	 */
+	public void saveState() {
+		ST01 = T01.dup();
+		ST02 = T02.dup();
+		ST03 = T03.dup();
+		ST04 = T04.dup();
+		ST05 = T05.dup();
+		ST06 = T06.dup();
+		ST07 = T07.dup();
+		ST08 = T08.dup();
+		ST09 = T09.dup();
+		ST10 = T10.dup();
+		ST11 = T11.dup();
+		ST12 = T12.dup();
+		ST13 = T13.dup();
+		ST14 = T14.dup();
+		ST15 = T15.dup();
+		ST16 = T16.dup();
+		ST17 = T17.dup();
+		ST18 = T18.dup();
+		ST19 = T19.dup();
+		ST20 = T20.dup();
+		ST21 = T21.dup();
+		ST22 = T22.dup();
+		ST23 = T23.dup();
+		ST24 = T24.dup();
+		ST25 = T25.dup();
+		ST26 = T26.dup();
+	}
+
+	/**
+	 * Restore state.
+	 */
+	public void restoreState() {
+		T01 = ST01.dup();
+		T02 = ST02.dup();
+		T03 = ST03.dup();
+		T04 = ST04.dup();
+		T05 = ST05.dup();
+		T06 = ST06.dup();
+		T07 = ST07.dup();
+		T08 = ST08.dup();
+		T09 = ST09.dup();
+		T10 = ST10.dup();
+		T11 = ST11.dup();
+		T12 = ST12.dup();
+		T13 = ST13.dup();
+		T14 = ST14.dup();
+		T15 = ST15.dup();
+		T16 = ST16.dup();
+		T17 = ST17.dup();
+		T18 = ST18.dup();
+		T19 = ST19.dup();
+		T20 = ST20.dup();
+		T21 = ST21.dup();
+		T22 = ST22.dup();
+		T23 = ST23.dup();
+		T24 = ST24.dup();
+		T25 = ST25.dup();
+		T26 = ST26.dup();
+	}
+
+	/**
+	 * Sets the show.
+	 * 
+	 * @param show
+	 *            the new show
+	 */
 	public void setShow(boolean show) {
 		this.show = show;
 	}
 
-	
+	/**
+	 * Checks if is show.
+	 * 
+	 * @return true, if is show
+	 */
 	public boolean isShow() {
 		return show;
 	}
 
-//	public void setSolveList(List<Byte> solveList) {
-//		this.solveList = solveList;
-//	}
+	// public void setSolveList(List<Byte> solveList) {
+	// this.solveList = solveList;
+	// }
 
+	/**
+	 * Gets the solve list.
+	 * 
+	 * @return the solve list
+	 */
 	public List<Byte> getSolveList() {
 		return solveList;
 	}
-	
+
 }
