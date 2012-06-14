@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/AppleJavaExtensions.jar"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/jinput.jar"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/lwjgl_test.jar"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/lwjgl_util_applet.jar"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/lwjgl-debug.jar"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/lwjgl.jar">
+	<classpathentry combineaccessrules="false" kind="src" path="/intextools"/>
+	<classpathentry kind="lib" path="lib/lwjgl/AppleJavaExtensions.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/jinput.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_test.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_util_applet.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl-debug.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="libs/lwjgl/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jglcube/lib/lwjgl/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/libs/lwjgl/lzma.jar"/>
-	<classpathentry kind="lib" path="/libs/commons-math-2.1.jar"/>
-	<classpathentry kind="lib" path="/libs/lwjgl/slick.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/intextools"/>
-	<classpathentry kind="lib" path="/libs/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/lzma.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl/slick.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-math-2.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
