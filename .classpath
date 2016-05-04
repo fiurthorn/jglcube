@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/intextools"/>
 	<classpathentry kind="lib" path="lib/lwjgl/AppleJavaExtensions.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/jinput.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_test.jar"/>

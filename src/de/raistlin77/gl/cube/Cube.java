@@ -75,6 +75,8 @@ public class Cube {
     /** The show. */
     private boolean show = true;
 
+    private int recDeep = 4;
+
     /**
      * Instantiates a new cube.
      */
@@ -224,6 +226,51 @@ public class Cube {
     }
 
     /**
+     * 
+     */
+    public void solve2() {
+        solveing = true;
+        countMoves = 0;
+
+        solveList.clear();
+        solve_rec( recDeep );
+        solveList.clear();
+
+        solveing = false;
+    }
+
+    private void solve_rec(int deep) {
+        Counter c = new Counter( 0 );
+        for ( byte turn = 1; turn <= 18; turn++ ) {
+            solve_rec( c, --deep, turn );
+        }
+    }
+
+    private void solve_rec(Counter c, int deep, byte turn) {
+        if ( deep >= 0 ) {
+            // if ( (c.value() % 10000) == 0 )
+
+            c.inc();
+            System.out.format( "%s ::: deep(%s):turn(%s)%n", c, StringUtils.rightPad( "", recDeep - deep, '-' ), turn );
+            move( turn );
+
+            // if ( isSolved() ) {
+            // return;
+            // } else {
+            for ( byte i = 1; i <= 18; i++ ) {
+                solve_rec( c, deep - 1, i );
+            }
+            // }
+            move( antiTurn( turn ) );
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private boolean isSolved() {
+        return false;
+    }
+
+    /**
      * Solve.
      */
     public void solve() {
@@ -336,7 +383,6 @@ public class Cube {
         System.out.println( StringUtils.join( solveList, "-" ) );
 
         solveing = false;
-
     }
 
     /**
@@ -358,7 +404,7 @@ public class Cube {
         case 14:
         case 15:
             return (byte) (move + 3);
-            // break;
+        // break;
         case 4:
         case 5:
         case 6:
@@ -369,7 +415,7 @@ public class Cube {
         case 17:
         case 18:
             return (byte) (move - 3);
-            // break;
+        // break;
         default:
             break;
         }

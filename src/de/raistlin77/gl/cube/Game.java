@@ -25,8 +25,6 @@ import org.lwjgl.util.glu.GLU;
  */
 public class Game {
 
-    // TODO display count
-
     /**
      * The Class rotate.
      */
@@ -73,8 +71,10 @@ public class Game {
     private static ANGLE[][] ANGLES2 = new ANGLE[26][3];
 
     /** The TILES. */
-    private static short[][] TILES = new short[][] { { -1, +1, +1 }, { 0, +1, +1 }, { +1, +1, +1 }, { -1, 0, +1 }, { 0, 0, +1 }, { +1, 0, +1 }, { -1, -1, +1 }, { 0, -1, +1 }, { +1, -1, +1 }, { -1, +1, 0 }, { 0, +1, 0 }, { +1, +1, 0 }, { -1, 0, 0 }, /*************/
-    { +1, 0, 0 }, { -1, -1, 0 }, { 0, -1, 0 }, { +1, -1, 0 }, { -1, +1, -1 }, { 0, +1, -1 }, { +1, +1, -1 }, { -1, 0, -1 }, { 0, 0, -1 }, { +1, 0, -1 }, { -1, -1, -1 }, { 0, -1, -1 }, { +1, -1, -1 } };
+    private static short[][] TILES = new short[][] { { -1, +1, +1 }, { 0, +1, +1 }, { +1, +1, +1 }, { -1, 0, +1 }, { 0, 0, +1 }, { +1, 0, +1 }, { -1, -1, +1 }, { 0, -1, +1 }, { +1, -1, +1 }, { -1, +1,
+            0 }, { 0, +1, 0 }, { +1, +1, 0 }, { -1, 0, 0 }, /*************/
+            { +1, 0, 0 }, { -1, -1, 0 }, { 0, -1, 0 }, { +1, -1, 0 }, { -1, +1, -1 }, { 0, +1, -1 }, { +1, +1, -1 }, { -1, 0, -1 }, { 0, 0, -1 }, { +1, 0, -1 }, { -1, -1, -1 }, { 0, -1, -1 }, { +1,
+                    -1, -1 } };
 
     /** The MANGLES. */
     private static short[][] MANGLES = new short[][] { { 0, 0, 0 }, // oben
@@ -125,7 +125,8 @@ public class Game {
     private static String titleAddon = null;
 
     /** The title addon ary. */
-    private static String[] titleAddonAry = { "Flächen erste Ebene", // 20
+    private static String[] titleAddonAry = { //
+            "Flächen erste Ebene", // 20
             "Kanten erste Ebene", // 21
             "Ecken erste Ebene", // 22
             "Flächen zweite Ebene", // 23
@@ -134,7 +135,8 @@ public class Game {
             "todo sortiere Kanten dritte Ebene", // 26
             "todo drehenKanten dritte Ebene", // 27
             "todo Ecken dritte Ebene", // 28
-            "todo ", "fertig" };
+            "todo ", "fertig" //
+    };
 
     /**
      * < Main vectors.
@@ -847,7 +849,8 @@ public class Game {
             // c.setShow( true );
             c.restoreState();
             solveList = c.getSolveList();
-            turn( (byte) glturn2cubeturn( solveList.remove( 0 ) ) );
+            if ( !solveList.isEmpty() )
+                turn( (byte) glturn2cubeturn( solveList.remove( 0 ) ) );
         }
     }
 
@@ -1147,7 +1150,7 @@ public class Game {
             } else if ( switchVector( 1, 0, 0, KZCube[tile] ) ) {
                 NUM = 7;
             }
-        }// /////////////////////////////////////////////////////////////////////////////////////////////////
+        } // /////////////////////////////////////////////////////////////////////////////////////////////////
         else if ( switchVector( 0, 0, 1, KYCube[tile] ) ) {// gerade nach vorne
                                                            // ///////////////////////////////
             if ( switchVector( 0, -1, 0, KZCube[tile] ) ) {
@@ -1171,7 +1174,7 @@ public class Game {
             } else if ( switchVector( 1, 0, 0, KZCube[tile] ) ) {
                 NUM = 15;
             }
-        }// /////////////////////////////////////////////////////////////////////////////////////////////////
+        } // /////////////////////////////////////////////////////////////////////////////////////////////////
         else if ( switchVector( -1, 0, 0, KYCube[tile] ) ) {// gerade nach links
                                                             // ///////////////////////////////
             if ( switchVector( 0, 0, 1, KZCube[tile] ) ) {
