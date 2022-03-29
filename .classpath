@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/lwjgl/AppleJavaExtensions.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl/jinput.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_test.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_util_applet.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl/lwjgl-debug.jar"/>
+	<classpathentry kind="src" path="src" />
+	<classpathentry kind="lib" path="lib/lwjgl/AppleJavaExtensions.jar" />
+	<classpathentry kind="lib" path="lib/lwjgl/jinput.jar" />
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_test.jar" />
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_util_applet.jar" />
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl_util.jar" />
+	<classpathentry kind="lib" path="lib/lwjgl/lwjgl-debug.jar" />
 	<classpathentry kind="lib" path="lib/lwjgl/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jglcube/lib/lwjgl/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jglcube/lib/lwjgl/linux" />
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/lwjgl/lzma.jar"/>
-	<classpathentry kind="lib" path="lib/lwjgl/slick.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math-2.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="lib" path="lib/lwjgl/lzma.jar" />
+	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar" />
+	<classpathentry kind="lib" path="lib/commons-math-2.1.jar" />
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" />
+	<classpathentry kind="output" path="bin" />
 </classpath>

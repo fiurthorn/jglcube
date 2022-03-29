@@ -1,0 +1,52 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cube",
+            "request": "launch",
+            "mainClass": "de.raistlin77.gl.cube.Cube",
+            "projectName": "jglcube"
+        },
+        {
+            "type": "java",
+            "name": "Launch Game",
+            "request": "launch",
+            "mainClass": "de.raistlin77.gl.cube.Game",
+            "projectName": "jglcube",
+            "linux": {
+                "vmArgs": "-Djava.library.path=lib/lwjgl/linux",
+            },
+            "windows": {
+                "vmArgs": "-Djava.library.path=lib/lwjgl/windows",
+            },
+            "classPaths": [
+                "lib/commons-math-2.1.jar",
+                "lib/commons-lang-2.5.jar",
+                "lib/lwjgl/AppleJavaExtensions.jar",
+                "lib/lwjgl/asm-debug-all.jar",
+                "lib/lwjgl/jinput.jar",
+                "lib/lwjgl/laf-plugin-7.2.1.jar",
+                "lib/lwjgl/laf-widget-7.2.1.jar",
+                "lib/lwjgl/log4j-api-2.0-beta9.jar",
+                "lib/lwjgl/lwjgl_test.jar",
+                "lib/lwjgl/lwjgl_util_applet.jar",
+                "lib/lwjgl/lwjgl_util.jar",
+                "lib/lwjgl/lwjgl-debug.jar",
+                "lib/lwjgl/lwjgl.jar",
+                "lib/lwjgl/lzma.jar",
+                "lib/lwjgl/substance-7.2.1.jar",
+                "lib/lwjgl/trident-7.2.1.jar"
+            ]
+        }
+    ]
+}
